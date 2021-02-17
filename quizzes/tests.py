@@ -32,6 +32,7 @@ class SimpleTest(TestCase):
             'author': self.user.id,
             'title': 'test'
         }
+        self.client.force_login(user=self.user)
         response = self.client.post(reverse('quiz-list'), data, content_type='application/json')
         self.assertEqual(response.status_code, 201)
 

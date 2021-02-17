@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .models import Quiz, Question, Answer
 from .serializers import QuizSerializer, QuestionSerializer, AnswerSerializer
@@ -10,6 +11,10 @@ from .paginations import OneByOnePagination
 class QuizViewSet(viewsets.ModelViewSet):
     queryset = Quiz.objects.all()
     serializer_class = QuizSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
 
     @property
     def paginator(self):

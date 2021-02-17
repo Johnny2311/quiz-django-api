@@ -3,7 +3,7 @@ from django.conf import settings
 
 
 class Quiz(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
     title = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     times_taken = models.IntegerField(default=0, editable=False)

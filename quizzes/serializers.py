@@ -19,7 +19,6 @@ class QuizSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'title',
-            'author',
             'author_fullname',
             'question_count',
             'created_at',
